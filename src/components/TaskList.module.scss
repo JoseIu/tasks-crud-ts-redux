@@ -1,0 +1,12 @@
+.tasks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+  gap: 2em;
+}
+
+.task {
+  padding: 1em;
+  border-radius: 0.3em;
+  color: #222;
+  background-color: #ffffffe7;
+}
