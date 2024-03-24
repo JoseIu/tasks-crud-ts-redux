@@ -7,14 +7,16 @@ const useTask = () => {
     description: '',
   });
 
-  const setTitle = (title: string) => setTaskState({ ...taskState, title });
+  const setTitle = (title: string) => setTaskState((prev) => ({ ...prev, title }));
 
-  const setDescription = (description: string) => setTaskState({ ...taskState, description });
-
+  const setDescription = (description: string) =>
+    setTaskState((prev) => ({ ...prev, description }));
+  const setID = (id: string) => setTaskState((prev) => ({ ...prev, id }));
   return {
     ...taskState,
     setTitle,
     setDescription,
+    setID,
   };
 };
 
