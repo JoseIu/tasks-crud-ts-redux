@@ -1,41 +1,54 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { TaskInterface } from '../../interfaces/task.interface';
+import { InitialStace } from '../../interfaces/task.interface';
 
-const initialState: TaskInterface[] = [
-  {
-    id: crypto.randomUUID(),
-    title: 'Task1',
-    description: 'First task',
-  },
-  {
-    id: crypto.randomUUID(),
-    title: 'Task2',
-    description: 'Second task',
-  },
-  {
-    id: crypto.randomUUID(),
-    title: 'Task3',
-    description: 'Third task',
-  },
-];
+const initialState: InitialStace = {
+  tasks: [
+    {
+      id: crypto.randomUUID(),
+      title: 'Task1',
+      description: 'First task',
+    },
+    {
+      id: crypto.randomUUID(),
+      title: 'Task2',
+      description: 'Second task',
+    },
+    {
+      id: crypto.randomUUID(),
+      title: 'Task3',
+      description: 'Third task',
+    },
+  ],
+
+  taskID: '',
+};
 
 const taskSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
     addTask: (state, action) => {
-      state.push(action.payload);
+      state.tasks.push(action.payload);
     },
     deleteTask: (state, action) => {
       const { payload } = action;
-      const findTask = state.findIndex((task) => task.id === payload);
+      const findTask = state.tasks.findIndex((task) => task.id === payload);
       console.log(findTask);
 
       if (findTask === -1) return;
 
-      state.splice(findTask, 1);
+      state.tasks.splice(findTask, 1);
+    },
+    editTask: (state, action) => {
+      const taskFinded = state.tasks.findIndex((task) => task.id === action.payload.id);
+      if (taskFinded === -1) return;
+
+      state.tasks[taskFinded] = action.payload;
+    },
+    setTaskID: (state, action) => {
+      state.taskID = action.payload;
     },
   },
 });
-export const { addTask, deleteTask } = taskSlice.actions;
+export const { addTask, deleteTask, editTask, setTaskID } = taskSlice.actions;
 export default taskSlice.reducer;
