@@ -44,6 +44,7 @@ const taskSlice = createSlice({
       if (taskFinded === -1) return;
 
       state.tasks[taskFinded] = action.payload;
+      state.taskID = '';
     },
     setTaskID: (state, action) => {
       state.taskID = action.payload;
